@@ -9,13 +9,13 @@ public class Node{
     private ArrayList<Node> children;
     private Player player;
     private int score;
-    private Player winningPlayer;
 
     public Node(Node parent, Board board, Player player){
         this.parent = parent;
         this.board = board;
         this.player = player;
         this.children = new ArrayList<>();
+        this.score = 0;
     }
 
     public ArrayList<Node> generateChildren(){
@@ -32,7 +32,7 @@ public class Node{
                             break;
                         case Player2:
                             childBoard = new Board(this.board.getBoardCopy());
-                            childBoard.getBoard()[i][j] = FieldState.X;  
+                            childBoard.getBoard()[i][j] = FieldState.X;
                             children.add(new Node(this, childBoard, Player.Player1));
                             break;
                         case None:
