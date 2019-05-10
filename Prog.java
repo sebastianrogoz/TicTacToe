@@ -8,13 +8,13 @@ public class Prog{
     public static void main(String[] args){
 
         FieldState[][] boardState = {
-            {FieldState.X,FieldState.empty,FieldState.empty},
+            {FieldState.empty,FieldState.empty,FieldState.empty},
             {FieldState.empty,FieldState.empty,FieldState.empty},
             {FieldState.empty,FieldState.empty,FieldState.empty}
         };
 
         Board rootBoard = new Board(boardState);
-        Node rootNode = new Node(null, rootBoard, Player.Player1);
+        Node rootNode = new Node(null, rootBoard, Player.Player2);
         ArrayList<Node> nodes = new ArrayList<>();
         nodes.addAll(rootNode.generateChildren());
         
@@ -22,5 +22,7 @@ public class Prog{
             node.getBoard().printBoard();
             System.out.print("\n");
         }
+
+        System.out.println("Children generated: " + nodes.size());
     }
 }

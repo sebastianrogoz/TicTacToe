@@ -27,13 +27,15 @@ public class Node{
                     switch(this.player){
                         case Player1:
                             childBoard = new Board(this.board.getBoardCopy());
-                            childBoard.makeMove(i, j, FieldState.O);
+                            childBoard.getBoard()[i][j] = FieldState.O;
                             children.add(new Node(this, childBoard, Player.Player2));
                             break;
                         case Player2:
                             childBoard = new Board(this.board.getBoardCopy());
-                            childBoard.makeMove(i, j, FieldState.X);  
+                            childBoard.getBoard()[i][j] = FieldState.X;  
                             children.add(new Node(this, childBoard, Player.Player1));
+                            break;
+                        case None:
                             break;
                     }
                 }                
