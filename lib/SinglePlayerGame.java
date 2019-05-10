@@ -1,19 +1,19 @@
 package TicTacToe.lib;
 
-import java.util.*;
+import java.util.Scanner;
 
-import TicTacToe.lib.Player;
-
-public class MultiplayerGame{
+public class SinglePlayerGame{
     private Board board;
 
-    public MultiplayerGame(){
+    public SinglePlayerGame(){
         this.board = new Board();
         Scanner reader = new Scanner(System.in);
         int column, row;
         ActionResult playerOneAction, playerTwoAction;
         Player end;
-
+        ComputerPlayer opponent = new ComputerPlayer();
+        int[] coords;
+    
         while(true){
             do{
                 System.out.print("\n\n\n");  
@@ -36,14 +36,8 @@ public class MultiplayerGame{
             }
 
             do{
-                System.out.print("\n\n\n");    
-                board.printBoard();
-                System.out.println("PLAYER2:");
-                System.out.print("Column: ");
-                column = Integer.parseInt(reader.nextLine());
-                System.out.print("Row: ");
-                row = Integer.parseInt(reader.nextLine());
-                playerTwoAction = board.makeMove(column, row, FieldState.X);
+                coords = opponent.getBestMove(new Node(null, this.board, Player.Player2, 0, null));
+                playerTwoAction = board.makeMove(coords[0], coords[1], FieldState.X);
             } while (playerTwoAction == ActionResult.error);
 
             

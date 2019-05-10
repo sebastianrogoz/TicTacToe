@@ -6,7 +6,6 @@ public class Node{
 
     private Board board;
     private Node parent;
-    private ArrayList<Node> children;
     private Player player;
     private int depth;
     private boolean isWinningNode;
@@ -16,7 +15,6 @@ public class Node{
         this.parent = parent;
         this.board = board;
         this.player = player;
-        this.children = new ArrayList<>();
         this.depth = depth;
         this.moveCoords = moveCoords;
         
@@ -53,16 +51,15 @@ public class Node{
                 }                
             }
         }
-        this.children = children;
         return children;
-    }
-
-    public ArrayList<Node> getChildren(){
-        return this.children;
     }
 
     public Board getBoard(){
         return this.board;
+    }
+
+    public Player getPlayer(){
+        return this.player;
     }
 
     public int[] getMoveCoords(){

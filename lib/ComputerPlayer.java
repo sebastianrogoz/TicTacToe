@@ -8,20 +8,20 @@ public class ComputerPlayer{
 
     public int[] getBestMove(Node root){
         ArrayList<Node> moves = new ArrayList<>();
+        ArrayList<Node> jaggedMoves = new ArrayList();
 
         moves.addAll(root.generateChildren());
-        do{
+        while(true){
 
             for(Node move : moves){
                 if (move.getIsWinningNode() == true){
                     return move.getMoveCoords();
                 }
-                moves.addAll(move.generateChildren());
+                jaggedMoves.addAll(move.generateChildren());
             }
+            moves = jaggedMoves;
+            jaggedMoves = new ArrayList<>();
 
-        } while(this.winningNode == null);
-
-        
-        return null;
+        }
     }
 }
