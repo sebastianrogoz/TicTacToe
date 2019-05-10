@@ -37,6 +37,7 @@ public class SinglePlayerGame{
 
             do{
                 coords = opponent.getBestMove(new Node(null, this.board, Player.Player2, 0, null));
+                System.out.println("Children generated: " + coords[2]);
                 playerTwoAction = board.makeMove(coords[0], coords[1], FieldState.X);
             } while (playerTwoAction == ActionResult.error);
 
