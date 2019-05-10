@@ -9,15 +9,16 @@ public class Prog{
 
         FieldState[][] boardState = {
             {FieldState.O,FieldState.empty,FieldState.empty},
-            {FieldState.empty,FieldState.O,FieldState.X},
-            {FieldState.empty,FieldState.X,FieldState.empty}
+            {FieldState.X,FieldState.empty,FieldState.X},
+            {FieldState.X,FieldState.X,FieldState.empty}
         };
 
         Board rootBoard = new Board(boardState);
-        Node rootNode = new Node(null, rootBoard, Player.Player1);
+        Node rootNode = new Node(null, rootBoard, Player.Player2, 0);
         ArrayList<Node> nodes = new ArrayList<>();
         nodes.addAll(rootNode.generateChildren());
         for(Node node : nodes){
+            System.out.println(node.checkWinning());
             node.getBoard().printBoard();
             System.out.print("\n");
         }
