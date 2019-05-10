@@ -1,7 +1,5 @@
 package TicTacToe;
 
-import java.util.ArrayList;
-
 import TicTacToe.lib.*;
 
 public class Prog{
@@ -14,15 +12,12 @@ public class Prog{
         };
 
         Board rootBoard = new Board(boardState);
-        Node rootNode = new Node(null, rootBoard, Player.Player2, 0);
-        ArrayList<Node> nodes = new ArrayList<>();
-        nodes.addAll(rootNode.generateChildren());
-        for(Node node : nodes){
-            System.out.println(node.checkWinning());
-            node.getBoard().printBoard();
-            System.out.print("\n");
-        }
+        Node rootNode = new Node(null, rootBoard, Player.Player2, 0, null);
 
-        System.out.println("Children generated: " + nodes.size());
+        ComputerPlayer opponent = new ComputerPlayer();
+
+        int[] coords = opponent.getBestMove(rootNode);
+
+        System.out.println("Best move: " + coords[0] + " " + coords[1]);
     }
 }

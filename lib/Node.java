@@ -4,25 +4,28 @@ import java.util.ArrayList;
 
 public class Node{
 
-    private Node parent;
     private Board board;
+    private Node parent;
     private ArrayList<Node> children;
     private Player player;
-    private int score;
     private int depth;
     private boolean isWinningNode;
+    private int[] moveCoords;
 
-    public Node(Node parent, Board board, Player player, int depth){
+    public Node(Node parent, Board board, Player player, int depth, int[] moveCoords){
         this.parent = parent;
         this.board = board;
         this.player = player;
         this.children = new ArrayList<>();
-        this.score = 0;
         this.depth = depth;
+        this.moveCoords = moveCoords;
         
         if(this.parent != null){
             if(this.board.assertWin() == this.parent.player){
                 this.isWinningNode = true;
+            }
+            else{
+                this.isWinningNode = false;
             }
         }
     }
@@ -37,12 +40,12 @@ public class Node{
                         case Player1:
                             childBoard = new Board(this.board.getBoardCopy());
                             childBoard.getBoard()[i][j] = FieldState.O;
-                            children.add(new Node(this, childBoard, Player.Player2, this.depth + 1));
+                            children.add(new Node(this, childBoard, Player.Player2, this.depth + 1, new int[] {i+1,j+1}));
                             break;
                         case Player2:
                             childBoard = new Board(this.board.getBoardCopy());
                             childBoard.getBoard()[i][j] = FieldState.X;
-                            children.add(new Node(this, childBoard, Player.Player1, this.depth + 1));
+                            children.add(new Node(this, childBoard, Player.Player1, this.depth + 1, new int[] {i+1,j+1}));
                             break;
                         case None:
                             break;
@@ -50,6 +53,7 @@ public class Node{
                 }                
             }
         }
+        this.children = children;
         return children;
     }
 
@@ -61,7 +65,11 @@ public class Node{
         return this.board;
     }
 
-    public boolean checkWinning(){
+    public int[] getMoveCoords(){
+        return this.moveCoords;
+    }
+
+    public boolean getIsWinningNode(){
         return this.isWinningNode;
     }
 

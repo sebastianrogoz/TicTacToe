@@ -1,14 +1,27 @@
 package TicTacToe.lib;
 
 import java.util.ArrayList;
-import java.util.stream.*;
 
 public class ComputerPlayer{
 
+    private Node winningNode;
+
     public int[] getBestMove(Node root){
         ArrayList<Node> moves = new ArrayList<>();
-        moves.addAll(root.generateChildren());
-        return new int[] {1,2};
-    }
 
+        moves.addAll(root.generateChildren());
+        do{
+
+            for(Node move : moves){
+                if (move.getIsWinningNode() == true){
+                    return move.getMoveCoords();
+                }
+                moves.addAll(move.generateChildren());
+            }
+
+        } while(this.winningNode == null);
+
+        
+        return null;
+    }
 }
