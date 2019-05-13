@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Board{
 
     private FieldState[][] board = new FieldState[3][3];
+    private Board parent;
 
     public Board() {
         for (int i = 0; i < 3; i++) {
@@ -14,8 +15,9 @@ public class Board{
         }
     }
 
-    public Board(FieldState[][] board) {
+    public Board(FieldState[][] board, Board parent) {
         this.board = board;
+        this.parent = parent;
     }
 
     public void printBoard() {
@@ -140,12 +142,12 @@ public class Board{
                 if(this.getBoard()[i][j] == FieldState.empty){
                     switch(player){
                         case Player1:
-                            childBoard = new Board(this.getBoardCopy());
+                            childBoard = new Board(this.getBoardCopy(), this);
                             childBoard.getBoard()[i][j] = FieldState.O;
                             children.add(childBoard);
                             break;
                         case Player2:
-                            childBoard = new Board(this.getBoardCopy());
+                            childBoard = new Board(this.getBoardCopy(), this);
                             childBoard.getBoard()[i][j] = FieldState.X;
                             children.add(childBoard);
                             break;
@@ -156,5 +158,20 @@ public class Board{
             }
         }
         return children;
+    }
+
+    public int[] getDifferenceCoords(Board board){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(this.board[i][j] != board.board[i][j]){
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public Board getParent(){
+        return this.parent;
     }
 }
