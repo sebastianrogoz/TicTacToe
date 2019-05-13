@@ -38,6 +38,7 @@ public class SinglePlayerGame{
             do{
                 coords = opponent.getWinningMoveCoords(board);
                 System.out.println("Children generated: " + coords[2]);
+                System.out.println( coords[0] + " " + coords[1]);
                 playerTwoAction = board.makeMove(coords[0], coords[1], Player.Player2);
             } while (playerTwoAction == ActionResult.error);
 

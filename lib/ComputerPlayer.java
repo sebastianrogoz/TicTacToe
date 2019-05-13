@@ -2,6 +2,7 @@ package TicTacToe.lib;
 
 import java.util.ArrayList;
 import static TicTacToe.lib.Player.*;
+import java.util.Random;
 
 public class ComputerPlayer{
 
@@ -27,8 +28,8 @@ public class ComputerPlayer{
 
         //generate children until winning move is found
         ArrayList<Board> tempChildren = new ArrayList<>();
-
-        while(true){
+        int tries = 0;
+        while(tries < 10){
             for(Board child : boardChildren){
                 tempChildren.addAll(child.generateChildren(Player1));
             }
@@ -45,6 +46,9 @@ public class ComputerPlayer{
                     return new int[] {child.getDifferenceCoords(child.getParent())[0], child.getDifferenceCoords(child.getParent())[1], childrenGenerated};
                 }
             }
+            tries++;
         }
+        Random rnd = new Random();
+        return new int[] {rnd.nextInt(4), rnd.nextInt(4), 0};
     }
 }

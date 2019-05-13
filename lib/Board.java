@@ -164,7 +164,7 @@ public class Board{
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 if(this.board[i][j] != board.board[i][j]){
-                    return new int[] {i, j};
+                    return new int[] {i + 1, j + 1};
                 }
             }
         }
