@@ -23,7 +23,7 @@ public class MultiplayerGame{
                 column = Integer.parseInt(reader.nextLine());
                 System.out.print("Row: ");
                 row = Integer.parseInt(reader.nextLine());
-                playerOneAction = board.makeMove(column, row, FieldState.O);
+                playerOneAction = board.makeMove(column, row, Player.Player1);
             } while (playerOneAction == ActionResult.error);
 
 
@@ -43,7 +43,7 @@ public class MultiplayerGame{
                 column = Integer.parseInt(reader.nextLine());
                 System.out.print("Row: ");
                 row = Integer.parseInt(reader.nextLine());
-                playerTwoAction = board.makeMove(column, row, FieldState.X);
+                playerTwoAction = board.makeMove(column, row, Player.Player2);
             } while (playerTwoAction == ActionResult.error);
 
             

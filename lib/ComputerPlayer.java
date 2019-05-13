@@ -1,9 +1,16 @@
 package TicTacToe.lib;
 
+import java.util.ArrayList;
+
 public class ComputerPlayer{
 
-    private Node winningNode;
+    public void getWinningMoveCoords(Board board, Player player){
+        ArrayList<Board> boardChildren = board.generateChildren(player);
 
-    public void getBestMove(Node root){        
-        }
+        //for (Board child : boardChildren){
+            //if (child.getBoard().assertWin(player)){
+
+            //}
+        //}
+    }
 }

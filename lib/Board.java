@@ -1,5 +1,7 @@
 package TicTacToe.lib;
 
+import java.util.ArrayList;
+
 public class Board{
 
     private FieldState[][] board = new FieldState[3][3];
@@ -25,10 +27,10 @@ public class Board{
         }
     }
 
-    public ActionResult makeMove(int column, int row, FieldState move) {
+    public ActionResult makeMove(int column, int row, Player player) {
         if ((1 <= column && column <= 3) && (1 <= row && row <= 3)) {
             if(this.board[row - 1][column - 1] == FieldState.empty){
-                this.board[row - 1][column - 1] = move;
+                this.board[row - 1][column - 1] = (player == Player.Player1) ? FieldState.O : FieldState.X;
                 return ActionResult.success;
             }
         }
@@ -128,5 +130,31 @@ public class Board{
 
     public FieldState[][] getBoard(){
         return this.board;
+    }
+
+    public ArrayList<Board> generateChildren(Player player){
+        ArrayList<Board> children = new ArrayList<>();
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j< 3; j++){
+                Board childBoard;
+                if(this.getBoard()[i][j] == FieldState.empty){
+                    switch(player){
+                        case Player1:
+                            childBoard = new Board(this.getBoardCopy());
+                            childBoard.getBoard()[i][j] = FieldState.O;
+                            children.add(childBoard);
+                            break;
+                        case Player2:
+                            childBoard = new Board(this.getBoardCopy());
+                            childBoard.getBoard()[i][j] = FieldState.X;
+                            children.add(childBoard);
+                            break;
+                        case None:
+                            break;
+                    }
+                }                
+            }
+        }
+        return children;
     }
 }

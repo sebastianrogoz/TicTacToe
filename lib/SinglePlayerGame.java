@@ -23,7 +23,7 @@ public class SinglePlayerGame{
                 column = Integer.parseInt(reader.nextLine());
                 System.out.print("Row: ");
                 row = Integer.parseInt(reader.nextLine());
-                playerOneAction = board.makeMove(column, row, FieldState.O);
+                playerOneAction = board.makeMove(column, row, Player.Player1);
             } while (playerOneAction == ActionResult.error);
 
 
@@ -36,9 +36,9 @@ public class SinglePlayerGame{
             }
 
             do{
-                coords = opponent.getBestMove(new Node(null, this.board, Player.Player2, 0, null));
+                coords = null;
                 System.out.println("Children generated: " + coords[2]);
-                playerTwoAction = board.makeMove(coords[0], coords[1], FieldState.X);
+                playerTwoAction = board.makeMove(coords[0], coords[1], Player.Player2);
             } while (playerTwoAction == ActionResult.error);
 
             
