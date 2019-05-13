@@ -35,9 +35,9 @@ public class Board{
         return ActionResult.error;
     }
 
-    public Player assertWin() {
+    public boolean assertWin(Player player) {
         int sum = 0;
-
+        Player winner = Player.None;
         //cols
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -48,9 +48,9 @@ public class Board{
                 }
             }
             if (sum > 2)
-                return Player.Player1;
+                winner = Player.Player1;
             if (sum < -2)
-                return Player.Player2;
+                winner = Player.Player2;
             sum = 0;
         }
         
@@ -64,9 +64,9 @@ public class Board{
                 }
             }
             if (sum > 2)
-                return Player.Player1;
+                winner = Player.Player1;
             if (sum < -2)
-                return Player.Player2;
+                winner = Player.Player2;
             sum = 0;
         }
 
@@ -83,9 +83,9 @@ public class Board{
             }
         }
         if (sum > 2)
-            return Player.Player1;
+            winner = Player.Player1;
         if (sum < -2)
-            return Player.Player2;
+            winner = Player.Player2;
         sum = 0;
 
         //anti-diagonal
@@ -101,12 +101,17 @@ public class Board{
             }
         }
         if (sum > 2)
-            return Player.Player1;
+            winner = Player.Player1;
         if (sum < -2)
-            return Player.Player2;
+            winner = Player.Player2;
         sum = 0;
 
-        return Player.None;
+        if(winner == player){
+            return true;
+        } else {
+            return false;
+        
+    }
     }
 
     public FieldState[][] getBoardCopy(){

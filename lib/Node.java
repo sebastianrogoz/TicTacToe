@@ -19,7 +19,7 @@ public class Node{
         this.moveCoords = moveCoords;
         
         if(this.parent != null){
-            if(this.board.assertWin() == this.parent.player){
+            if(this.board.assertWin(this.parent.player)){
                 this.isWinningNode = true;
             }
             else{
