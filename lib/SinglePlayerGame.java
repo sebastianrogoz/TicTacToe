@@ -10,7 +10,6 @@ public class SinglePlayerGame{
         Scanner reader = new Scanner(System.in);
         int column, row;
         ActionResult playerOneAction, playerTwoAction;
-        boolean end;
         ComputerPlayer opponent = new ComputerPlayer();
         int[] coords;
     
@@ -26,31 +25,34 @@ public class SinglePlayerGame{
                 playerOneAction = board.makeMove(column, row, Player.Player1);
             } while (playerOneAction == ActionResult.error);
 
-
-            end = board.assertWin(Player.Player1);
-            if (end){
+            if (board.assertWin(Player.Player1)){
                 System.out.print("\n\n\n");
                 board.printBoard();
                 System.out.print("Player 1 WINS! ");
                 break;
             }
 
+            if(this.board.isFull()){
+                System.out.print("\n\n\n");
+                board.printBoard();
+                System.out.print("DRAW! ");
+                break;
+            }
+
             do{
                 coords = opponent.getWinningMoveCoords(board);
-                System.out.println("Children generated: " + coords[2]);
                 System.out.println( coords[0] + " " + coords[1]);
                 playerTwoAction = board.makeMove(coords[0], coords[1], Player.Player2);
             } while (playerTwoAction == ActionResult.error);
-
             
-            end = board.assertWin(Player.Player2);
-            if (end){
+            if (board.assertWin(Player.Player2)){
                 System.out.print("\n\n\n");
                 board.printBoard();
                 System.out.print("Player 2 WINS!");
                 break;
             }
         }
+
         reader.close();
     }
 }
