@@ -2,7 +2,6 @@ package TicTacToe.lib;
 
 import java.util.ArrayList;
 import static TicTacToe.lib.Player.*;
-import java.util.Random;
 
 public class ComputerPlayer{
 
